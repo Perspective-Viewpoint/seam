@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data;
+package dev.dannytaylor.perspective.seam.common.data;
 
 import net.minecraft.resources.Identifier;
 

@@ -29,7 +29,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.dannytaylor.perspective.seam.Seam"
+          "dev.dannytaylor.perspective.seam.common.Seam"
+		],
+		"client": [
+			"dev.dannytaylor.perspective.seam.client.SeamClient"
 		]
 	},
 	"mixins": [

@@ -5,10 +5,10 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.events;
+package dev.dannytaylor.perspective.seam.common.events;
 
-import dev.dannytaylor.perspective.seam.data.AbstractMod;
-import dev.dannytaylor.perspective.seam.data.log.SeamLog;
+import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
+import dev.dannytaylor.perspective.seam.common.data.log.SeamLog;
 
 public class SeamEvents {
     public static void onInitialize(AbstractMod mod, String name, Runnable onInitialize) {

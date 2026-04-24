@@ -5,9 +5,9 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data.log;
+package dev.dannytaylor.perspective.seam.common.data.log;
 
-import dev.dannytaylor.perspective.seam.data.AbstractMod;
+import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
 
 public class SeamLog {
     public static void send(AbstractMod mod, LogType type, String message, Object... args) {

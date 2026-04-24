@@ -5,9 +5,9 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.events.registries;
+package dev.dannytaylor.perspective.seam.common.events.registries;
 
-import dev.dannytaylor.perspective.seam.events.registries.entries.PriorityEntry;
+import dev.dannytaylor.perspective.seam.common.events.registries.entries.PriorityEntry;
 import net.minecraft.resources.Identifier;
 
 import java.util.Comparator;

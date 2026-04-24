@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data;
+package dev.dannytaylor.perspective.seam.common.data;
 
 public class PerspectiveMod extends SubMod {
     public PerspectiveMod(String id, String name) {

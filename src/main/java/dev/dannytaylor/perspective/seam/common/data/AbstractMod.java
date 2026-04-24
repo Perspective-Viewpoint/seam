@@ -5,9 +5,9 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data;
+package dev.dannytaylor.perspective.seam.common.data;
 
-import dev.dannytaylor.perspective.seam.data.log.Log;
+import dev.dannytaylor.perspective.seam.common.data.log.Log;
 import net.minecraft.resources.Identifier;
 
 public abstract class AbstractMod {

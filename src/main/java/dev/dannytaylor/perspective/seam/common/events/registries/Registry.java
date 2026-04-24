@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.events.registries;
+package dev.dannytaylor.perspective.seam.common.events.registries;
 
 import net.minecraft.resources.Identifier;
 

@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data.log;
+package dev.dannytaylor.perspective.seam.common.data.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

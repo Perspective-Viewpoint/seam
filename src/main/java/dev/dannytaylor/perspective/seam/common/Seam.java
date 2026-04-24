@@ -5,10 +5,9 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam;
+package dev.dannytaylor.perspective.seam.common;
 
-import dev.dannytaylor.perspective.seam.data.PerspectiveMod;
-import dev.dannytaylor.perspective.seam.events.SeamEvents;
+import dev.dannytaylor.perspective.seam.common.data.PerspectiveMod;
 import net.fabricmc.api.ModInitializer;
 
 public class Seam implements ModInitializer {
@@ -20,8 +19,5 @@ public class Seam implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		SeamEvents.onInitialize(getMod(), getMod().getName(), () -> {
-
-		}, true);
 	}
 }

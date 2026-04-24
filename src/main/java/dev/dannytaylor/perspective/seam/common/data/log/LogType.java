@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.data.log;
+package dev.dannytaylor.perspective.seam.common.data.log;
 
 public enum LogType {
     INFO,
