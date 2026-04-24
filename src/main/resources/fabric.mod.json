@@ -1,0 +1,51 @@
+{
+	"schemaVersion": 1,
+	"id": "seam",
+	"version": "${version}",
+	"name": "Seam",
+	"description": "Shared classes for Perspective and Luminance",
+	"authors": [
+		{
+			"name": "dannytaylor",
+			"contact": {
+				"homepage": "https://modrinth.com/user/dannytaylor",
+				"donate": "https://ko-fi.com/legotaylor"
+			}
+		},
+		{
+			"name": "Nettakrim",
+			"contact": {
+				"homepage": "https://modrinth.com/user/Nettakrim",
+				"donate": ""
+			}
+		}
+	],
+	"contact": {
+		"homepage": "https://github.com/Perspective-Viewpoint/",
+		"sources": "https://github.com/Perspective-Viewpoint/seam"
+	},
+	"license": "LGPL-3.0",
+	"icon": "assets/seam/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.dannytaylor.seam.Seam"
+		]
+	},
+	"mixins": [
+		"dt-seam.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+		  "badges": [
+			"library"
+		  ]
+		}
+	}
+}
