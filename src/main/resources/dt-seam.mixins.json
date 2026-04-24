@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "dev.dannytaylor.seam.mixin",
+	"package": "dev.dannytaylor.perspective.seam.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"ExampleMixin"
