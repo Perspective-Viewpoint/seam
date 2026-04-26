@@ -7,11 +7,15 @@
 
 package dev.dannytaylor.perspective.seam.common.events.registries;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class GenericRegistry<K, V> {
-    public final Map<K, V> registry = new HashMap<>();
+    public final Map<K, V> registry;
+
+    public GenericRegistry(Map<K, V> registry) {
+        this.registry = registry;
+    }
 
     /**
      * Registers the specified value to the specified key, if the specified key is not already assigned.
@@ -65,5 +69,14 @@ public class GenericRegistry<K, V> {
      */
     public V remove(K key) {
         return registry.remove(key);
+    }
+
+    /**
+     * Performs the given action for each entry in this registry until all entries have been processed or
+     *         the action throws an exception.
+     * @param action The action to be performed for each entry.
+     */
+    public void forEach(BiConsumer<? super K, ? super V> action) {
+        registry.forEach(action);
     }
 }

@@ -1,15 +1,22 @@
 /*
     Seam
-    Contributor(s): dannytaylor
+    Contributor(s): dannytaylor, Nettakrim
     Github: https://github.com/Perspective-Viewpoint/seam
     Licence: GNU LGPLv3
 */
 
 package dev.dannytaylor.perspective.seam.common.events;
 
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphics;
 import org.apache.commons.lang3.Strings;
 
 public class SeamRunnables {
+    @FunctionalInterface
+    public interface GuiRender {
+        void run(GuiGraphics guiGraphics, DeltaTracker deltaTracker);
+    }
+
     @FunctionalInterface
     public interface NoInputCallable<O> {
         O call();

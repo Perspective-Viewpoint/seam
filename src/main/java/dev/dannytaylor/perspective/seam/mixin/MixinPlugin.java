@@ -31,8 +31,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		String className = mixinClassName.replaceFirst("dev.dannytaylor.perspective.seam.mixin.", "");
 		if (className.startsWith("compat.")) {
-			String[] split = className.split("/\\./gm");
-            return FabricLoader.getInstance().isModLoaded(split[1]);
+			String[] split = className.split("\\.");
+            return split.length < 2 || FabricLoader.getInstance().isModLoaded(split[1]);
 		}
 		return true;
 	}

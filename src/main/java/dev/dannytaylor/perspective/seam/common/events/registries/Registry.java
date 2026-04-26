@@ -9,5 +9,5 @@ package dev.dannytaylor.perspective.seam.common.events.registries;
 
 import net.minecraft.resources.Identifier;
 
-public class Registry<V> extends GenericRegistry<Identifier, V> {
+public class Registry<V> extends HashRegistry<Identifier, V> {
 }

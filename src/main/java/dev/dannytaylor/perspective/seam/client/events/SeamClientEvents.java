@@ -9,24 +9,31 @@ package dev.dannytaylor.perspective.seam.client.events;
 
 import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
 import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
-import dev.dannytaylor.perspective.seam.common.events.registries.GenericRegistry;
+import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
+import dev.dannytaylor.perspective.seam.common.events.registries.HashRegistry;
 import dev.dannytaylor.perspective.seam.common.events.registries.Registry;
 import dev.dannytaylor.perspective.seam.common.util.Components;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.components.debug.DebugScreenEntries;
+import net.minecraft.client.gui.components.debug.DebugScreenEntry;
+import net.minecraft.client.gui.components.debug.DebugScreenEntryStatus;
+import net.minecraft.client.gui.components.debug.DebugScreenProfile;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class SeamClientEvents extends SeamEvents {
     public static final Registry<CustomBadge> CustomBadges = new Registry<>();
-    public static final GenericRegistry<String, List<Identifier>> ModBadges = new GenericRegistry<>();
-    public static final GenericRegistry<String, List<IconOverride>> IconOverrides = new GenericRegistry<>();
+    public static final HashRegistry<String, List<Identifier>> ModBadges = new HashRegistry<>();
+    public static final HashRegistry<String, List<IconOverride>> IconOverrides = new HashRegistry<>();
+
+    public static final Registry<ProfiledEntry> ProfiledDebugEntries = new Registry<>();
+
+    public static final Registry<SeamRunnables.GuiRender> BeforeGuiRender = new Registry<>();
+    public static final Registry<SeamRunnables.GuiRender> AfterGuiRender = new Registry<>();
 
     private static final MessageBar messageBar = new MessageBar();
 
@@ -44,14 +51,9 @@ public class SeamClientEvents extends SeamEvents {
         IconOverrides.get(modId).add(iconOverride);
     }
 
-    public static Optional<IconOverride> getIconOverride(String modId) {
-        List<IconOverride> iconOverrides = IconOverrides.get(modId);
-        if (iconOverrides != null) {
-            for (IconOverride iconOverride : iconOverrides.stream().sorted(Comparator.comparing((iconOverride) -> iconOverride.getIconId().toString(), String.CASE_INSENSITIVE_ORDER)).toList()) {
-                if (iconOverride.shouldOverride()) return Optional.of(iconOverride);
-            }
-        }
-        return Optional.empty();
+    public static void registerProfiledDebugEntry(Identifier identifier, DebugScreenEntry debugScreenEntry, DebugScreenProfile profile, DebugScreenEntryStatus status) {
+        ProfiledDebugEntries.put(identifier, new ProfiledEntry(profile, status));
+        DebugScreenEntries.register(identifier, debugScreenEntry);
     }
 
     public static void sendToMessageBar(Component message) {

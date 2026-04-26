@@ -21,8 +21,9 @@
 		}
 	],
 	"contact": {
-		"homepage": "https://github.com/Perspective-Viewpoint/",
-		"sources": "https://github.com/Perspective-Viewpoint/seam"
+		"homepage": "https://github.com/Perspective-Viewpoint",
+		"sources": "https://github.com/Perspective-Viewpoint/seam",
+		"issues": "https://github.com/Perspective-Viewpoint/seam/issues"
 	},
 	"license": "LGPL-3.0",
 	"icon": "assets/perspective_seam/icon.png",

@@ -6,6 +6,8 @@
 	"mixins": [
 	],
 	"client": [
+		"client.gui.DebugScreenEntryListMixin",
+		"client.gui.GuiMixin",
 		"compat.modmenu.FabricModMixin",
 		"compat.modmenu.ModsScreenMixin"
 	],

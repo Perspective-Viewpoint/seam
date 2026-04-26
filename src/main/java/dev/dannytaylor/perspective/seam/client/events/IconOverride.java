@@ -7,6 +7,8 @@
 
 package dev.dannytaylor.perspective.seam.client.events;
 
+import dev.dannytaylor.perspective.seam.client.SeamClient;
+import dev.dannytaylor.perspective.seam.common.data.log.SeamLog;
 import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,7 +37,12 @@ public class IconOverride {
     }
 
     public boolean shouldOverride() {
-        return this.shouldOverride.call();
+        try {
+            return this.shouldOverride.call();
+        } catch (Exception error) {
+            SeamLog.error(SeamClient.getMod(), SeamClientEvents.getErrorMessage().get(), error);
+        }
+        return false;
     }
 
     public void setShouldOverride(SeamRunnables.NoInputCallable<Boolean> shouldOverride) {

@@ -25,7 +25,7 @@ public class SeamEvents {
     }
 
     public static void tryRun(AbstractMod mod, Runnable runnable) {
-        tryRun(mod, runnable, (error) -> new SeamRunnables.LogMessage("Caught an exception!"));
+        tryRun(mod, runnable, (error) -> getErrorMessage());
     }
 
     public static void tryRun(AbstractMod mod, Runnable runnable, SeamRunnables.SingleInputCallable<Exception, SeamRunnables.LogMessage> errorMessage) {
@@ -35,6 +35,10 @@ public class SeamEvents {
             SeamRunnables.LogMessage logMessage = errorMessage.call(error);
             SeamLog.error(mod, logMessage.get(), error);
         }
+    }
+
+    public static SeamRunnables.LogMessage getErrorMessage() {
+        return new SeamRunnables.LogMessage("Caught an exception!");
     }
 
     private static String getInitializingName(String name) {
