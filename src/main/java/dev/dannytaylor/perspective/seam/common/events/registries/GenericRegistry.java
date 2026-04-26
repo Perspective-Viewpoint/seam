@@ -14,27 +14,56 @@ public class GenericRegistry<K, V> {
     public final Map<K, V> registry = new HashMap<>();
 
     /**
-     * @param key key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
-     * @return the specified key, or `null` if this registry already contains the specified key
+     * Registers the specified value to the specified key, if the specified key is not already assigned.
+     * @param key key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return the specified key, or
+     *         {@code null} if this registry already contained the specified key.
     */
     public K register(K key, V value) {
         if (!registry.containsKey(key)) {
-            registry.put(key, value);
+            this.put(key, value);
             return key;
         }
         return null;
     }
 
+    /**
+     * @param key key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return the previous value associated with the specified key, or
+     *         {@code null} if there was no mapping for the key.
+     */
+    public V put(K key, V value) {
+        return registry.put(key, value);
+    }
+
+    /**
+     * @return value associated with the specified key, or
+     *         {@code null} if there is no mapping for the key.
+    */
     public V get(K key) {
         return registry.get(key);
     }
 
-    public void modify(K key, V value) {
-        registry.replace(key, value);
+    /**
+     * Replaces the entry for the specified key only if it is currently mapped to some value (optional operation).
+     * @param key key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return the previous value associated with the specified key, or
+     *         {@code null} if there was no mapping for the key.
+    */
+    public V modify(K key, V value) {
+        return registry.replace(key, value);
     }
 
-    public void remove(K key) {
-        registry.remove(key);
+    /**
+     * Removes the mapping for a key from this map if it is present (optional operation).
+     * @param key key with which the specified value is to be associated.
+     * @return the previous value associated with the specified key, or
+     *         {@code null} if there was no mapping for the key.
+     */
+    public V remove(K key) {
+        return registry.remove(key);
     }
 }
