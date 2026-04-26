@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.perspective.seam.client;
 
-import dev.dannytaylor.perspective.seam.client.events.CustomBadges;
 import dev.dannytaylor.perspective.seam.client.events.SeamClientEvents;
 import dev.dannytaylor.perspective.seam.common.Seam;
 import dev.dannytaylor.perspective.seam.common.data.PerspectiveMod;
@@ -30,7 +29,7 @@ public class SeamClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		SeamClientEvents.onInitialize(getMod(), "Client", () -> {
-			CustomBadges.onInitializeClient(getMod());
+			SeamClientEvents.onInitializeClient(getMod());
 			ClientTickEvents.START_CLIENT_TICK.register((client) -> {
 				SeamClientEvents.onTickClient(getMod());
 			});

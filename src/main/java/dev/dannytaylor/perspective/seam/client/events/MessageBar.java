@@ -7,8 +7,11 @@
 
 package dev.dannytaylor.perspective.seam.client.events;
 
+import dev.dannytaylor.perspective.seam.client.SeamClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 @Environment(EnvType.CLIENT)
@@ -34,5 +37,10 @@ public class MessageBar {
 
     private void setRemainingTicks(float ticks) {
         this.ticksRemaining = ticks;
+    }
+
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+        int time = (int) Math.min((this.ticksRemaining - deltaTracker.getGameTimeDeltaPartialTick(true)) * 255.0F / 20.0F, 255.0F);
+        if (time > 10) guiGraphics.drawCenteredString(SeamClient.getMinecraft().font, this.component, (int) (SeamClient.getMinecraft().getWindow().getGuiScaledWidth() / 2.0F), 23, 16777215 | (time << 24 & -16777216));
     }
 }

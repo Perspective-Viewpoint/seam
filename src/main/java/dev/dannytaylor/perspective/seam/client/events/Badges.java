@@ -14,7 +14,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class CustomBadges {
+public class Badges {
     public static final Identifier PERSPECTIVE = SeamClientEvents.registerCustomBadge(SeamClient.getMod().idOf("perspective"),
             0xFFFF8F8F,
             0xFFB73A3A,

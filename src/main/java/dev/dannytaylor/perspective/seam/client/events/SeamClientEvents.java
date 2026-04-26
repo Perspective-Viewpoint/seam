@@ -7,6 +7,7 @@
 
 package dev.dannytaylor.perspective.seam.client.events;
 
+import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
 import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
 import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
@@ -62,6 +63,13 @@ public class SeamClientEvents extends SeamEvents {
 
     public static void sendToMessageBar(Component message, float ticks) {
         messageBar.send(message, ticks);
+    }
+
+    public static void onInitializeClient(AbstractMod mod) {
+        onInitialize(SeamClient.getMod(), "Client Events", () -> {
+            Badges.onInitializeClient(mod);
+            AfterGuiRender.register(mod.idOf("message_overlay"), messageBar::render);
+        });
     }
 
     public static void onTickClient(AbstractMod mod) {
