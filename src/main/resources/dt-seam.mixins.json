@@ -3,7 +3,12 @@
 	"package": "dev.dannytaylor.perspective.seam.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+	],
+	"client": [
+		"compat.modmenu.FabricModMixin",
+		"compat.modmenu.ModsScreenMixin"
+	],
+	"server": [
 	],
 	"injectors": {
 		"defaultRequire": 1

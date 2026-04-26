@@ -18,11 +18,22 @@ public class SeamEvents {
     public static void onInitialize(AbstractMod mod, String name, Runnable onInitialize, boolean logFinish) {
         String initializingName = getInitializingName(name);
         SeamLog.info(mod, "Initializing{}...", initializingName);
-        try {
+        tryRun(mod, () -> {
             onInitialize.run();
             if (logFinish) SeamLog.info(mod, "Finished initializing{}!", initializingName);
+        }, (error) -> new SeamRunnables.LogMessage("Failed to initialize{}!", initializingName));
+    }
+
+    public static void tryRun(AbstractMod mod, Runnable runnable) {
+        tryRun(mod, runnable, (error) -> new SeamRunnables.LogMessage("Caught an exception!"));
+    }
+
+    public static void tryRun(AbstractMod mod, Runnable runnable, SeamRunnables.SingleInputCallable<Exception, SeamRunnables.LogMessage> errorMessage) {
+        try {
+            runnable.run();
         } catch (Exception error) {
-            SeamLog.error(mod, "Failed to initialize{}", initializingName, error);
+            SeamRunnables.LogMessage logMessage = errorMessage.call(error);
+            SeamLog.error(mod, logMessage.get(), error);
         }
     }
 
