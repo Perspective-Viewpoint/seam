@@ -16,8 +16,8 @@ import net.minecraft.resources.Identifier;
 @Environment(EnvType.CLIENT)
 public class Badges {
     public static final Identifier PERSPECTIVE = SeamClientEvents.registerCustomBadge(SeamClient.getMod().idOf("perspective"),
-            0xFFFF8F8F,
-            0xFFB73A3A,
+            0xFF053654,
+            0xFF26AEFF,
             0xFFFFFFFF
     );
     public static final Identifier LUMINANCE = SeamClientEvents.registerCustomBadge(
