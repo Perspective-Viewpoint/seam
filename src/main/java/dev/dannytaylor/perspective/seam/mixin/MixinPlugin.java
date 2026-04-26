@@ -1,3 +1,10 @@
+/*
+    Seam
+    Contributor(s): dannytaylor
+    Github: https://github.com/Perspective-Viewpoint/seam
+    Licence: GNU LGPLv3
+*/
+
 package dev.dannytaylor.perspective.seam.mixin;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;

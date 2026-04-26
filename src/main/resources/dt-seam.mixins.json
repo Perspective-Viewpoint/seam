@@ -2,6 +2,7 @@
 	"required": true,
 	"package": "dev.dannytaylor.perspective.seam.mixin",
 	"compatibilityLevel": "JAVA_21",
+	"plugin": "dev.dannytaylor.perspective.seam.mixin.MixinPlugin",
 	"mixins": [
 	],
 	"client": [

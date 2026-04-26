@@ -1,3 +1,10 @@
+/*
+    Seam
+    Contributor(s): dannytaylor
+    Github: https://github.com/Perspective-Viewpoint/seam
+    Licence: GNU LGPLv3
+*/
+
 package dev.dannytaylor.perspective.seam.mixin.compat.modmenu;
 
 import com.terraformersmc.modmenu.util.DrawingUtil;
@@ -6,6 +13,8 @@ import com.terraformersmc.modmenu.util.mod.ModBadgeRenderer;
 import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.client.events.CustomBadge;
 import dev.dannytaylor.perspective.seam.client.events.SeamClientEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 @Mixin(priority = 100, value = ModBadgeRenderer.class, remap = false)
 public abstract class ModsScreenMixin {
 	@Shadow protected int badgeX;

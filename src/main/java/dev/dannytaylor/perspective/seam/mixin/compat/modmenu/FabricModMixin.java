@@ -1,8 +1,17 @@
+/*
+    Seam
+    Contributor(s): dannytaylor
+    Github: https://github.com/Perspective-Viewpoint/seam
+    Licence: GNU LGPLv3
+*/
+
 package dev.dannytaylor.perspective.seam.mixin.compat.modmenu;
 
 import com.terraformersmc.modmenu.util.mod.fabric.FabricIconHandler;
 import com.terraformersmc.modmenu.util.mod.fabric.FabricMod;
 import dev.dannytaylor.perspective.seam.client.events.SeamClientEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
@@ -16,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
+@Environment(EnvType.CLIENT)
 @Mixin(priority = 100, value = FabricMod.class, remap = false)
 public abstract class FabricModMixin {
 	@Shadow
