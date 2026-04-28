@@ -9,7 +9,7 @@ package dev.dannytaylor.perspective.seam.client.events;
 
 import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.common.data.log.SeamLog;
-import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
+import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
@@ -42,7 +42,7 @@ public class IconOverride {
         try {
             return this.shouldOverride.call();
         } catch (Exception error) {
-            SeamLog.error(SeamClient.getMod(), SeamClientEvents.getErrorMessage().get(), error);
+            SeamLog.error(SeamClient.getMod(), SeamEvents.getErrorMessage().get(), error);
         }
         return false;
     }

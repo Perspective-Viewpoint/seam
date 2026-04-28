@@ -9,6 +9,7 @@ package dev.dannytaylor.perspective.seam.client.events;
 
 import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
+import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
@@ -29,7 +30,7 @@ public class Badges {
 
     /** This function is used to register seam's custom badges, it shouldn't be used by other projects. */
     public static void onInitializeClient(AbstractMod mod) {
-        SeamClientEvents.onInitialize(mod, "Custom Badges", () -> {});
+        SeamEvents.onInitialize(mod, "Custom Badges", () -> {});
     }
 
     public static void perspective(String modId) {

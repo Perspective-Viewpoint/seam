@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "client.item.ItemStackMixin",
     "client.mouse.MouseHandlerMixin",
     "client.render.DebugScreenEntryListMixin",
     "client.render.GameRendererAccessor",

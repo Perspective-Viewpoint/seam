@@ -26,7 +26,7 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import java.util.*;
 
 @Environment(EnvType.CLIENT)
-public class SeamClientEvents extends SeamEvents {
+public class SeamClientEvents {
     public static final Registry<CustomBadge> CustomBadges = new Registry<>();
     public static final HashRegistry<String, List<Identifier>> ModBadges = new HashRegistry<>();
     public static final HashRegistry<String, List<IconOverride>> IconOverrides = new HashRegistry<>();
@@ -53,6 +53,9 @@ public class SeamClientEvents extends SeamEvents {
 
     public static final Registry<Runnable> OnJoinWorld = new Registry<>();
     public static final Registry<Runnable> OnLeaveWorld = new Registry<>();
+
+    public static final Registry<SeamClientRunnables.UseItem> OnStartItemUse = new Registry<>();
+    public static final Registry<SeamClientRunnables.FinishUsingItem> OnFinishItemUse = new Registry<>();
 
     private static final MessageBar messageBar = new MessageBar();
 
@@ -84,13 +87,13 @@ public class SeamClientEvents extends SeamEvents {
     }
 
     public static void onInitializeClient(AbstractMod mod) {
-        onInitialize(SeamClient.getMod(), "Client Events", () -> {
+        SeamEvents.onInitialize(SeamClient.getMod(), "Client Events", () -> {
             Badges.onInitializeClient(mod);
             AfterGuiRender.register(mod.idOf("message_overlay"), messageBar::render);
         });
     }
 
     public static void onTickClient(AbstractMod mod) {
-        tryRun(mod, messageBar::tick);
+        SeamEvents.tryRun(mod, messageBar::tick);
     }
 }

@@ -9,11 +9,28 @@ package dev.dannytaylor.perspective.seam.client.events;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
-import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public class SeamClientRunnables extends SeamRunnables {
+@Environment(EnvType.CLIENT)
+public class SeamClientRunnables {
+    @FunctionalInterface
+    public interface UseItem {
+        void run(ItemStack stack, Level level, Player user, InteractionHand hand);
+    }
+
+    @FunctionalInterface
+    public interface FinishUsingItem {
+        void run(ItemStack stack, Level level, LivingEntity user);
+    }
+
     @FunctionalInterface
     public interface GuiRender {
         void run(GuiGraphics guiGraphics, DeltaTracker deltaTracker);

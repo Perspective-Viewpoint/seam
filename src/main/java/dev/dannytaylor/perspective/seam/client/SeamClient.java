@@ -10,6 +10,7 @@ package dev.dannytaylor.perspective.seam.client;
 import dev.dannytaylor.perspective.seam.client.events.SeamClientEvents;
 import dev.dannytaylor.perspective.seam.common.Seam;
 import dev.dannytaylor.perspective.seam.common.data.PerspectiveMod;
+import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -28,7 +29,7 @@ public class SeamClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		SeamClientEvents.onInitialize(getMod(), "Client", () -> {
+		SeamEvents.onInitialize(getMod(), "Client", () -> {
 			SeamClientEvents.onInitializeClient(getMod());
 			ClientTickEvents.START_CLIENT_TICK.register((client) -> {
 				SeamClientEvents.onTickClient(getMod());

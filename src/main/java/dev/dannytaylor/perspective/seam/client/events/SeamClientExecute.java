@@ -10,7 +10,9 @@ package dev.dannytaylor.perspective.seam.client.events;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.common.data.log.LogMessage;
-import dev.dannytaylor.perspective.seam.common.events.SeamExecute;
+import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.debug.DebugScreenEntryStatus;
@@ -18,11 +20,17 @@ import net.minecraft.client.gui.components.debug.DebugScreenProfile;
 import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.joml.Vector2i;
 
 import java.util.*;
 
-public class SeamClientExecute extends SeamExecute {
+@Environment(EnvType.CLIENT)
+public class SeamClientExecute {
     public static Optional<IconOverride> getIconOverride(String modId) {
         List<IconOverride> iconOverrides = SeamClientEvents.IconOverrides.get(modId);
         if (iconOverrides != null) {
@@ -51,52 +59,52 @@ public class SeamClientExecute extends SeamExecute {
 
     public static void beforeGuiRender(GuiGraphics guiGraphics, DeltaTracker renderTickCounter) {
         SeamClientEvents.BeforeGuiRender.forEach(((id, runnable) -> {
-            SeamClientEvents.tryRun(SeamClient.getMod(), () -> runnable.run(guiGraphics, renderTickCounter), input -> new LogMessage("Failed to execute BeforeGuiRender event with id: {}", id));
+            SeamEvents.tryRun(SeamClient.getMod(), () -> runnable.run(guiGraphics, renderTickCounter), input -> new LogMessage("Failed to execute BeforeGuiRender event with id: {}", id));
         }));
     }
 
     public static void afterGuiRender(GuiGraphics guiGraphics, DeltaTracker renderTickCounter) {
-        SeamClientEvents.AfterGuiRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.AfterGuiRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(guiGraphics, renderTickCounter);
         }, input -> new LogMessage("Failed to execute AfterGuiRender event with id: {}", id))));
     }
 
     public static void beforeGameRender() {
-        SeamClientEvents.BeforeGameRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute BeforeGameRender event with id: {}", id))));
+        SeamClientEvents.BeforeGameRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute BeforeGameRender event with id: {}", id))));
     }
 
     public static void afterPanoramaRender(GuiGraphics guiGraphics, int width, int height, boolean rotate, GraphicsResourceAllocator allocator) {
-        SeamClientEvents.AfterPanoramaRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.AfterPanoramaRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(guiGraphics, width, height, rotate, new SeamClientRunnables.RenderData(SeamClient.getMinecraft().getMainRenderTarget(), allocator));
         }, input -> new LogMessage("Failed to execute AfterPanoramaRender event with id: {}", id))));
     }
 
     public static void afterVanillaPostEffectRender(GraphicsResourceAllocator allocator) {
-        SeamClientEvents.AfterVanillaPostEffectRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.AfterVanillaPostEffectRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(new SeamClientRunnables.RenderData(SeamClient.getMinecraft().getMainRenderTarget(), allocator));
         }, input -> new LogMessage("Failed to execute AfterVanillaPostEffectRender event with id: {}", id))));
     }
 
     public static void beforeUiRender(GraphicsResourceAllocator allocator) {
-        SeamClientEvents.BeforeUiRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.BeforeUiRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(new SeamClientRunnables.RenderData(SeamClient.getMinecraft().getMainRenderTarget(), allocator));
         }, input -> new LogMessage("Failed to execute BeforeUiRender event with id: {}", id))));
     }
 
     public static void afterUiBackgroundRender(GraphicsResourceAllocator allocator) {
-        SeamClientEvents.AfterUiBackgroundRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.AfterUiBackgroundRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(new SeamClientRunnables.RenderData(SeamClient.getMinecraft().getMainRenderTarget(), allocator));
         }, input -> new LogMessage("Failed to execute AfterUiBackgroundRender event with id: {}", id))));
     }
 
     public static void afterUiRender(GraphicsResourceAllocator allocator) {
-        SeamClientEvents.AfterUiRender.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.AfterUiRender.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(new SeamClientRunnables.RenderData(SeamClient.getMinecraft().getMainRenderTarget(), allocator));
         }, input -> new LogMessage("Failed to execute AfterUiRender event with id: {}", id))));
     }
 
     public static void resize(int width, int height) {
-        SeamClientEvents.OnResized.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), () -> {
+        SeamClientEvents.OnResized.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
             runnable.run(width, height);
         }, input -> new LogMessage("Failed to execute OnResized event with id: {}", id))));
     }
@@ -118,10 +126,22 @@ public class SeamClientExecute extends SeamExecute {
     }
 
     public static void onJoinWorld() {
-        SeamClientEvents.OnJoinWorld.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute OnJoinWorld event with id: {}", id))));
+        SeamClientEvents.OnJoinWorld.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute OnJoinWorld event with id: {}", id))));
     }
 
     public static void onLeaveWorld() {
-        SeamClientEvents.OnLeaveWorld.forEach(((id, runnable) -> SeamClientEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute OnLeaveWorld event with id: {}", id))));
+        SeamClientEvents.OnLeaveWorld.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), runnable, input -> new LogMessage("Failed to execute OnLeaveWorld event with id: {}", id))));
+    }
+
+    public static void onStartItemUse(ItemStack stack, Level level, Player user, InteractionHand hand) {
+        SeamClientEvents.OnStartItemUse.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
+            runnable.run(stack, level, user, hand);
+        }, input -> new LogMessage("Failed to execute OnStartItemUse event with id: {}", id))));
+    }
+
+    public static void onFinishItemUse(ItemStack stack, Level level, LivingEntity user) {
+        SeamClientEvents.OnFinishItemUse.forEach(((id, runnable) -> SeamEvents.tryRun(SeamClient.getMod(), () -> {
+            runnable.run(stack, level, user);
+        }, input -> new LogMessage("Failed to execute OnFinishItemUse event with id: {}", id))));
     }
 }
