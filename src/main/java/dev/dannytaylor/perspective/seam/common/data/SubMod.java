@@ -7,14 +7,20 @@
 
 package dev.dannytaylor.perspective.seam.common.data;
 
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.resources.Identifier;
+import org.apache.commons.lang3.Strings;
 
-public class SubMod extends AbstractMod {
+public class SubMod extends FabricMod {
     private final String baseId;
 
-    public SubMod(String id, String baseId, String name) {
-        super(id, name);
+    public SubMod(String id, String baseId, String name, ModMetadata metadata) {
+        super(id, name, metadata);
         this.baseId = baseId;
+    }
+
+    public static SubMod fromMetadata(String baseId, ModMetadata metadata) {
+        return new SubMod(Strings.CS.replaceOnce(metadata.getId(), baseId + "_", ""), baseId, metadata.getName(), metadata);
     }
 
     public String getBaseId() {

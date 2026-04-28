@@ -7,8 +7,19 @@
 
 package dev.dannytaylor.perspective.seam.common.data;
 
+import net.fabricmc.loader.api.metadata.ModMetadata;
+import org.apache.commons.lang3.Strings;
+
 public class PerspectiveMod extends SubMod {
-    public PerspectiveMod(String id, String name) {
-        super(id, "perspective", name);
+    public PerspectiveMod(String id, String name, ModMetadata metadata) {
+        super(id, getPerspective(), name, metadata);
+    }
+
+    public static PerspectiveMod fromMetadata(ModMetadata metadata) {
+        return new PerspectiveMod(Strings.CS.replaceOnce(metadata.getId(), getPerspective() + "_", ""), metadata.getName(), metadata);
+    }
+
+    public static String getPerspective() {
+        return "perspective";
     }
 }

@@ -9,9 +9,10 @@ package dev.dannytaylor.perspective.seam.common;
 
 import dev.dannytaylor.perspective.seam.common.data.PerspectiveMod;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class Seam implements ModInitializer {
-	private static final PerspectiveMod mod = new PerspectiveMod("seam", "Seam");
+	private static final PerspectiveMod mod = PerspectiveMod.fromMetadata(FabricLoader.getInstance().getModContainer("perspective_seam").orElseThrow().getMetadata());
 
 	public static PerspectiveMod getMod() {
 		return mod;
