@@ -8,6 +8,7 @@
 package dev.dannytaylor.perspective.seam.common.events.registries;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class GenericRegistry<K, V> {
@@ -78,5 +79,12 @@ public class GenericRegistry<K, V> {
      */
     public void forEach(BiConsumer<? super K, ? super V> action) {
         registry.forEach(action);
+    }
+
+    /**
+     * @return a {@link Set} view of the keys contained in this registry.
+    */
+    public Set<K> keySet() {
+        return registry.keySet();
     }
 }

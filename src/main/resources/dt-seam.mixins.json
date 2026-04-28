@@ -1,22 +1,28 @@
 {
-	"required": true,
-	"package": "dev.dannytaylor.perspective.seam.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"plugin": "dev.dannytaylor.perspective.seam.mixin.MixinPlugin",
-	"mixins": [
-	],
-	"client": [
-		"client.gui.DebugScreenEntryListMixin",
-		"client.gui.GuiMixin",
-		"compat.modmenu.FabricModMixin",
-		"compat.modmenu.ModsScreenMixin"
-	],
-	"server": [
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "dev.dannytaylor.perspective.seam.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "dev.dannytaylor.perspective.seam.mixin.MixinPlugin",
+  "mixins": [
+  ],
+  "client": [
+    "client.mouse.MouseHandlerMixin",
+    "client.render.DebugScreenEntryListMixin",
+    "client.render.GameRendererAccessor",
+    "client.render.GameRendererMixin",
+    "client.render.GuiMixin",
+    "client.render.PanoramaRendererMixin",
+    "client.render.ScreenMixin",
+    "client.resources.MinecraftMixin",
+    "compat.modmenu.FabricModMixin",
+    "compat.modmenu.ModsScreenMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }

@@ -14,12 +14,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
 
+import java.util.concurrent.Callable;
+
 @Environment(EnvType.CLIENT)
 public class IconOverride {
     private Identifier iconId;
-    private SeamRunnables.NoInputCallable<Boolean> shouldOverride;
+    private Callable<Boolean> shouldOverride;
 
-    public IconOverride(Identifier iconId, SeamRunnables.NoInputCallable<Boolean> shouldOverride) {
+    public IconOverride(Identifier iconId, Callable<Boolean> shouldOverride) {
         this.iconId = iconId;
         this.shouldOverride = shouldOverride;
     }
@@ -45,7 +47,7 @@ public class IconOverride {
         return false;
     }
 
-    public void setShouldOverride(SeamRunnables.NoInputCallable<Boolean> shouldOverride) {
+    public void setShouldOverride(Callable<Boolean> shouldOverride) {
         this.shouldOverride = shouldOverride;
     }
 }

@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.mixin.client.gui;
+package dev.dannytaylor.perspective.seam.mixin.client.render;
 
 import dev.dannytaylor.perspective.seam.client.events.SeamClientExecute;
 import net.minecraft.client.gui.components.debug.DebugScreenEntryList;

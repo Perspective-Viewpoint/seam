@@ -10,7 +10,6 @@ package dev.dannytaylor.perspective.seam.client.events;
 import dev.dannytaylor.perspective.seam.client.SeamClient;
 import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
 import dev.dannytaylor.perspective.seam.common.events.SeamEvents;
-import dev.dannytaylor.perspective.seam.common.events.SeamRunnables;
 import dev.dannytaylor.perspective.seam.common.events.registries.HashRegistry;
 import dev.dannytaylor.perspective.seam.common.events.registries.Registry;
 import dev.dannytaylor.perspective.seam.common.util.Components;
@@ -22,6 +21,7 @@ import net.minecraft.client.gui.components.debug.DebugScreenEntryStatus;
 import net.minecraft.client.gui.components.debug.DebugScreenProfile;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 
 import java.util.*;
 
@@ -33,8 +33,26 @@ public class SeamClientEvents extends SeamEvents {
 
     public static final Registry<ProfiledEntry> ProfiledDebugEntries = new Registry<>();
 
-    public static final Registry<SeamRunnables.GuiRender> BeforeGuiRender = new Registry<>();
-    public static final Registry<SeamRunnables.GuiRender> AfterGuiRender = new Registry<>();
+    public static final Registry<PreparableReloadListener> ClientResourceReloaders = new Registry<>();
+    public static final Registry<Runnable> AfterClientResourceReload = new Registry<>();
+
+    public static final Registry<SeamClientRunnables.GuiRender> BeforeGuiRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.GuiRender> AfterGuiRender = new Registry<>();
+
+    public static final Registry<Runnable> BeforeGameRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.PanoramaRender> AfterPanoramaRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.GameRender> AfterVanillaPostEffectRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.GameRender> BeforeUiRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.GameRender> AfterUiBackgroundRender = new Registry<>();
+    public static final Registry<SeamClientRunnables.GameRender> AfterUiRender = new Registry<>();
+
+    public static final Registry<SeamClientRunnables.OnResized> OnResized = new Registry<>();
+
+    public static final Registry<SeamClientCallables.OnMouseScroll> OnMouseScroll = new Registry<>();
+    public static final Registry<SeamClientCallables.OnMouseButton> OnMouseButton = new Registry<>();
+
+    public static final Registry<Runnable> OnJoinWorld = new Registry<>();
+    public static final Registry<Runnable> OnLeaveWorld = new Registry<>();
 
     private static final MessageBar messageBar = new MessageBar();
 

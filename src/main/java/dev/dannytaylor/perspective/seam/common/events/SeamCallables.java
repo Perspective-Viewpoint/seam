@@ -7,9 +7,14 @@
 
 package dev.dannytaylor.perspective.seam.common.events;
 
-public class SeamRunnables {
+public class SeamCallables {
     @FunctionalInterface
-    public interface SingleInputRunnable<I> {
-        void run(I input);
+    public interface NoInputCallable<O> {
+        O call();
+    }
+
+    @FunctionalInterface
+    public interface SingleInputCallable<I, O> {
+        O call(I input);
     }
 }

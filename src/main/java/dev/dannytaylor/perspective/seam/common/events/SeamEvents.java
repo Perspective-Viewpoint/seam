@@ -8,6 +8,7 @@
 package dev.dannytaylor.perspective.seam.common.events;
 
 import dev.dannytaylor.perspective.seam.common.data.AbstractMod;
+import dev.dannytaylor.perspective.seam.common.data.log.LogMessage;
 import dev.dannytaylor.perspective.seam.common.data.log.SeamLog;
 
 public class SeamEvents {
@@ -21,24 +22,24 @@ public class SeamEvents {
         tryRun(mod, () -> {
             onInitialize.run();
             if (logFinish) SeamLog.info(mod, "Finished initializing{}!", initializingName);
-        }, (error) -> new SeamRunnables.LogMessage("Failed to initialize{}!", initializingName));
+        }, (error) -> new LogMessage("Failed to initialize{}!", initializingName));
     }
 
     public static void tryRun(AbstractMod mod, Runnable runnable) {
         tryRun(mod, runnable, (error) -> getErrorMessage());
     }
 
-    public static void tryRun(AbstractMod mod, Runnable runnable, SeamRunnables.SingleInputCallable<Exception, SeamRunnables.LogMessage> errorMessage) {
+    public static void tryRun(AbstractMod mod, Runnable runnable, SeamCallables.SingleInputCallable<Exception, LogMessage> errorMessage) {
         try {
             runnable.run();
         } catch (Exception error) {
-            SeamRunnables.LogMessage logMessage = errorMessage.call(error);
+            LogMessage logMessage = errorMessage.call(error);
             SeamLog.error(mod, logMessage.get(), error);
         }
     }
 
-    public static SeamRunnables.LogMessage getErrorMessage() {
-        return new SeamRunnables.LogMessage("Caught an exception!");
+    public static LogMessage getErrorMessage() {
+        return new LogMessage("Caught an exception!");
     }
 
     private static String getInitializingName(String name) {

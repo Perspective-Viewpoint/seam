@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.perspective.seam.mixin.client.gui;
+package dev.dannytaylor.perspective.seam.mixin.client.render;
 
 import dev.dannytaylor.perspective.seam.client.events.SeamClientExecute;
 import net.minecraft.client.DeltaTracker;
@@ -24,14 +24,14 @@ public abstract class GuiMixin {
 	@Shadow @Final private Minecraft minecraft;
 
 	@Inject(at = @At(value = "HEAD"), method = "render")
-	private void luminance$renderBefore(GuiGraphics guiGraphics, DeltaTracker tickCounter, CallbackInfo ci) {
+	private void seam$renderBefore(GuiGraphics guiGraphics, DeltaTracker tickCounter, CallbackInfo ci) {
 		if (!this.minecraft.gameRenderer.isPanoramicMode()) {
 			SeamClientExecute.beforeGuiRender(guiGraphics, tickCounter);
 		}
 	}
 
 	@Inject(at = @At(value = "TAIL"), method = "render")
-	private void luminance$renderAfter(GuiGraphics guiGraphics, DeltaTracker tickCounter, CallbackInfo ci) {
+	private void seam$renderAfter(GuiGraphics guiGraphics, DeltaTracker tickCounter, CallbackInfo ci) {
 		if (!this.minecraft.gameRenderer.isPanoramicMode()) {
 			SeamClientExecute.afterGuiRender(guiGraphics, tickCounter);
 		}
